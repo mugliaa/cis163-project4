@@ -95,6 +95,35 @@ public class LinkedList<E> {
 
 		return false;
 	}
+	
+	public boolean delete (int index) {
+		// check for empty list
+		if (top == null) 
+			return false;
+
+		// check if top element is the target
+		if (index == 0) {
+			top = top.getNext();
+			if (top.getNext() == null)
+				tail = null;
+			return true;
+		}
+
+		Node<E> temp = top;
+		int i = 0;
+		while (temp.getNext() != null) {
+			if ((i + 1) == index) {
+				temp.setNext(temp.getNext().getNext());
+				if (temp.getNext() == null)
+					tail = temp;
+				return true;
+			}
+			temp = temp.getNext();	
+			i ++;
+		}
+
+		return false;
+	}
 
 	public void deleteHalfWay() {
 
