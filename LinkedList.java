@@ -19,17 +19,30 @@ public class LinkedList<E> {
 
 	public void display() {
 		Node<E> temp = top;
-		System.out.println ("-----------------");
 		int counter = 0;
 		while (counter != count()) {
 			System.out.print(counter + " ");
 			counter ++;
 		}
 		System.out.println("");
+		int count = 0;
 		while (temp != null) {
 			// System.out.print(counter + " ");
-			System.out.print (temp.getData() + " ");
-			temp = temp.getNext();
+			if (count >= 9) {
+				if (count >= 99) {
+					System.out.print (temp.getData() + "   ");
+					temp = temp.getNext();
+				}
+				else {
+					System.out.print (temp.getData() + "  ");
+					temp = temp.getNext();
+				}
+			}
+			else {
+				System.out.print (temp.getData() + " ");
+				temp = temp.getNext();
+			}
+			count ++;
 		}
 	}
 
