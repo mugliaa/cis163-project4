@@ -17,6 +17,42 @@ public class LinkedList<E> {
 			top = new Node<E>(data, top);
 	}
 
+
+        public boolean addBefore( int index, String charB4) {
+		// check for empty list
+		if (top == null) 
+			return false;
+
+		// check if top element is the target
+		if (index == 0) {
+			top = top.getNext();
+			if (top.getNext() == null)
+				tail = null;
+			return true;
+		}
+		
+		Node<E> temp = top;
+		Node<E> temp1 = temp;
+		
+		int i = 0;
+		while (temp.getNext() != null) {
+			if ((i + 1) == index) {
+				temp1.setData((E) charB4);
+				temp = temp1.getNext();
+				
+			    
+				if (temp.getNext() == null)
+					tail = temp;
+				return true;
+			}
+			temp = temp.getNext();	
+			i ++;
+		}
+
+		return false;
+		    }
+	
+
 	public void display() {
 		Node<E> temp = top;
 		int counter = 0;
