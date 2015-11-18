@@ -31,8 +31,26 @@ public class Mix implements iMix {
 		
 		// User wants to insert a character before the specified position.
 		if (command.startsWith("b")) {
+			System.out.println(command);
+			String temp[] = command.split(" ");
+			//String specifiedChar = temp[1];
+			//String position = temp[2];
+			System.out.println(temp[1]);
+			System.out.println(temp[2]);
+			
 			// Format: b c #
+			
+			secretMessage.addBefore(Integer.parseInt(temp[2]), temp[1]);
 			commands.push(command);
+			secretMessage.display();
+			System.out.println("");
+			System.out.println("");
+			printCommandListing();
+			System.out.println("");
+			System.out.println("Command: ");
+			String c = s.nextLine();
+			System.out.println("");
+			processCommand(c);
 			s.close();
 			return null;
 		}
