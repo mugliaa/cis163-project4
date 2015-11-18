@@ -180,6 +180,18 @@ public class Mix implements iMix {
 		System.out.println("s filename \t Save commands to a text file named 'filename'.");
 	}
 	
+	private boolean isNumeric(String str) {
+		try  
+		{  
+			int i = Integer.parseInt(str);  
+		}  
+		catch(NumberFormatException nfe)  
+		{  
+			return false;  
+		}  
+		return true;  
+	}
+	
 	public static void main(String[] args) throws IOException {
 		Mix m = new Mix();
 		Scanner s = new Scanner(new InputStreamReader(System.in));
