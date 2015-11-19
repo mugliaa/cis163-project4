@@ -123,7 +123,7 @@ public class Mix implements iMix {
 			
 			// Format: b c #
 			
-			secretMessage.addBefore(Integer.parseInt(temp[2]), temp[1]);
+			secretMessage.addBefore(Integer.parseInt(data[2]), data[1]);
 			commands.push(command);
 			secretMessage.display();
 			System.out.println("");
