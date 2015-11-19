@@ -31,23 +31,26 @@ public class LinkedList<E> {
 			return true;
 		}
 		
-		Node<E> temp = top;
-		Node<E> temp1 = temp;
 		
-		int i = 0;
-		while (temp.getNext() != null) {
-			if ((i + 1) == index) {
-				temp1.setData((E) charB4);
-				temp = temp1.getNext();
-				
-			    
-				if (temp.getNext() == null)
-					tail = temp;
-				return true;
-			}
-			temp = temp.getNext();	
-			i ++;
-		}
+		 else
+	       {
+			 
+			 
+		   Node<E> temp = top;
+		   Node<E> temp1;
+		   Node<E> temp2;
+	     
+	       int i = 0;
+	             for(i=1;i< index;i++)
+	             {
+	             temp = temp.getNext();
+	             }
+	             temp2 = temp.getNext();
+	             temp1 = new Node<E> ((E)charB4, temp2);
+	             temp.setNext(temp1); 
+	            
+	             
+	       }
 
 		return false;
 		    }
