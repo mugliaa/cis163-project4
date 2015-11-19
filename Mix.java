@@ -32,11 +32,94 @@ public class Mix implements iMix {
 		// User wants to insert a character before the specified position.
 		if (command.startsWith("b")) {
 			System.out.println(command);
-			String temp[] = command.split(" ");
-			//String specifiedChar = temp[1];
-			//String position = temp[2];
-			System.out.println(temp[1]);
-			System.out.println(temp[2]);
+			String data[] = command.split(" ");
+
+			//System.out.println(temp[1]);
+			//System.out.println(temp[2]);
+			
+			if (data.length == 1) {
+				System.out.println("Invalid command entered! Try again!");
+				System.out.println("");
+				secretMessage.display();
+				System.out.println("");
+				System.out.println("");
+				printCommandListing();
+				System.out.println("");
+				System.out.println("Command: ");
+				String c = s.nextLine();
+				System.out.println("");
+				processCommand(c);
+				s.close();
+				return null;
+			}
+			
+			// Checking if command was properly input
+			if (data[1].equals(null)) {
+				System.out.println("Invalid command entered! Try again!");
+				System.out.println("");
+				secretMessage.display();
+				System.out.println("");
+				System.out.println("");
+				printCommandListing();
+				System.out.println("");
+				System.out.println("Command: ");
+				String c = s.nextLine();
+				System.out.println("");
+				processCommand(c);
+				s.close();
+				return null;
+			}
+			
+			if (data[1].equals("") || data[1].equals(" ")) {
+				System.out.println("Invalid command entered! Try again!");
+				System.out.println("");
+				secretMessage.display();
+				System.out.println("");
+				System.out.println("");
+				printCommandListing();
+				System.out.println("");
+				System.out.println("Command: ");
+				String c = s.nextLine();
+				System.out.println("");
+				processCommand(c);
+				s.close();
+				return null;
+			}
+			
+			if (!isNumeric(data[1])) {
+				System.out.println("Invalid command entered! Try again!");
+				System.out.println("");
+				secretMessage.display();
+				System.out.println("");
+				System.out.println("");
+				printCommandListing();
+				System.out.println("");
+				System.out.println("Command: ");
+				String c = s.nextLine();
+				System.out.println("");
+				processCommand(c);
+				s.close();
+				return null;
+			}
+			
+			int index = Integer.parseInt(data[1]);
+			
+			// Checking if index is valid
+			if (index < 0 || index > secretMessage.count()) {
+				System.out.println("Invalid position entered! Try again!");
+				System.out.println("");
+				secretMessage.display();
+				System.out.println("");
+				System.out.println("");
+				printCommandListing();
+				System.out.println("");
+				System.out.println("Command: ");
+				String c = s.nextLine();
+				System.out.println("");
+				processCommand(c);
+				s.close();
+				return null;
+			}
 			
 			// Format: b c #
 			
