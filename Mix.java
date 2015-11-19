@@ -102,7 +102,7 @@ public class Mix implements iMix {
 				return null;
 			}
 			
-			int index = Integer.parseInt(data[1]);
+			int index = Integer.parseInt(data[2]);
 			
 			// Checking if index is valid
 			if (index < 0 || index > secretMessage.count()) {
