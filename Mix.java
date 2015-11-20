@@ -211,7 +211,7 @@ public class Mix implements iMix {
 			int index = Integer.parseInt(data[1]);
 			
 			// Checking if index is valid
-			if (index < 0 || index > secretMessage.count()) {
+			if (index < 0 || index >= secretMessage.count()) {
 				System.out.println("Invalid position entered! Try again!");
 				System.out.println("");
 				secretMessage.display();
@@ -374,6 +374,9 @@ public class Mix implements iMix {
 		
 		// Invalid command entered. Prompt user again.
 		System.out.println("Invalid command entered! Try again!");
+		System.out.println("");
+		secretMessage.display();
+		System.out.println("");
 		System.out.println("");
 		printCommandListing();
 		System.out.println("");
