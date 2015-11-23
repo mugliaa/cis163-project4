@@ -18,7 +18,7 @@ public class LinkedList<E> {
 	}
 
 
-        public boolean addBefore( int index, String charB4) {
+	public boolean addBefore(int index, String charB4) {
 		// check for empty list
 		if (top == null) 
 			return false;
@@ -30,31 +30,63 @@ public class LinkedList<E> {
 				tail = null;
 			return true;
 		}
-		
-		
-		 else
-	       {
-			 
-			 
-		   Node<E> temp = top;
-		   Node<E> temp1;
-		   Node<E> temp2;
-	     
-	       int i = 0;
-	             for(i=1;i< index;i++)
-	             {
-	             temp = temp.getNext();
-	             }
-	             temp2 = temp.getNext();
-	             temp1 = new Node<E> ((E)charB4, temp2);
-	             temp.setNext(temp1); 
-	            
-	             
-	       }
+		else {
+			Node<E> temp = top;
+			Node<E> temp1;
+			Node<E> temp2;
 
+			int i = 0;
+			for(i=1;i< index;i++)
+			{
+				temp = temp.getNext();
+			}
+			temp2 = temp.getNext();
+			temp1 = new Node<E> ((E)charB4, temp2);
+			temp.setNext(temp1); 
+		}
 		return false;
-		    }
+	}
 	
+	public boolean switchData(int index1, int index2) {
+		// check for empty list
+		if (top == null) 
+			return false;
+		
+		E data1 = search(index1);
+		E data2 = search(index2);
+		
+		int count = 0;
+		Node<E> temp = top;
+		while (count != index1) {
+			temp = temp.getNext();
+			count++;
+		}
+		temp.setData(data2);
+		
+		
+		count = 0;
+		temp = top;
+		while (count != index2) {
+			temp = temp.getNext();
+			count++;
+		}
+		temp.setData(data1);
+		return true;
+	}
+	
+	private E search(int index) {
+		int c = 0;
+		Node<E> temp = top;
+		while (c != index) {
+			temp = temp.getNext();
+			c++;
+		}
+		return temp.getData();
+	}
+	
+	public void cutFromList(int index1, int index2) {
+		
+	}
 
 	public void display() {
 		Node<E> temp = top;
@@ -97,7 +129,6 @@ public class LinkedList<E> {
 	}
 
 	public void addAtEnd (E data) {
-
 		if (top == null) 
 			tail = top = new Node<E> (data, top);
 
@@ -105,7 +136,6 @@ public class LinkedList<E> {
 			tail.setNext(new Node<E>(data, null));
 			tail = tail.getNext();
 		}
-
 	} 
 
 	public boolean delete (E data) {
@@ -134,7 +164,7 @@ public class LinkedList<E> {
 
 		return false;
 	}
-	
+
 	public boolean delete (int index) {
 		// check for empty list
 		if (top == null) 
@@ -171,35 +201,35 @@ public class LinkedList<E> {
 
 
 	public static void main (String[] args){
-//		LinkedList<Character> list = new 
-//				LinkedList<String>();
-//
-//		list.addAtEnd("pizza1");
-//		list.addfirst("pizza2");
-//		list.addfirst("pizza3");
-//		list.addfirst("pizza4");
-//		list.addAtEnd("pizza5");
-//
-//		list.display();
-//
-//		list.delete("pizza1");
-//		list.display();
-//
-//		list.delete("pizza2");
-//		list.display();
-//
-//
-//				list.addAtEnd("pizza11");
-//
-//				list.addfirst("pizza3");
-//				list.addfirst("pizza4");
-//				list.addfirst("pizza5");
-//				list.addfirst("pizza6");
-//				list.addfirst("pizza7");
-//				list.addfirst("pizza8");
-//				list.addAtEnd("pizza9");
-//
-//		list.display();
+		//		LinkedList<Character> list = new 
+		//				LinkedList<String>();
+		//
+		//		list.addAtEnd("pizza1");
+		//		list.addfirst("pizza2");
+		//		list.addfirst("pizza3");
+		//		list.addfirst("pizza4");
+		//		list.addAtEnd("pizza5");
+		//
+		//		list.display();
+		//
+		//		list.delete("pizza1");
+		//		list.display();
+		//
+		//		list.delete("pizza2");
+		//		list.display();
+		//
+		//
+		//				list.addAtEnd("pizza11");
+		//
+		//				list.addfirst("pizza3");
+		//				list.addfirst("pizza4");
+		//				list.addfirst("pizza5");
+		//				list.addfirst("pizza6");
+		//				list.addfirst("pizza7");
+		//				list.addfirst("pizza8");
+		//				list.addAtEnd("pizza9");
+		//
+		//		list.display();
 
 	}
 
