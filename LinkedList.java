@@ -84,8 +84,47 @@ public class LinkedList<E> {
 		return temp.getData();
 	}
 	
-	public void cutFromList(int index1, int index2) {
+	public String cutFromList(int index1, int index2) {
+		// check for empty list
+		if (top == null) 
+			return null;
+
+		if (index2 < index1) {
+			return null;
+		}
 		
+		String str = copyFromList(index1, index2);
+		
+		Node<E> temp = top;
+		Node<E> next = top;
+		int count = 0;
+		while (count != index2 + 1) {
+			next = next.getNext();
+			count++;
+		}
+
+		if (index1 != 0) {
+			count = 0;
+			while (count != index1 - 1) {
+				temp = temp.getNext(); // Problem
+				count++;
+			}
+			temp.setNext(next);
+		}
+		else {
+			top = next;
+		}
+		return str;
+	}
+	
+	public String copyFromList(int index1, int index2) {
+		String copy = "";
+		int temp = index1;
+		while (temp != index2 + 1) {
+			copy += search(temp);
+			temp++;
+		}
+		return copy;
 	}
 
 	public void display() {
