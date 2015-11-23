@@ -25,7 +25,8 @@ public class LinkedList<E> {
 
 		// check if top element is the target
 		if (index == 0) {
-			top = top.getNext();
+			temp = top = new Node<E>((E) charB4, temp);
+
 			if (top.getNext() == null)
 				tail = null;
 			return true;
