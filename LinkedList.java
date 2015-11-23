@@ -19,6 +19,9 @@ public class LinkedList<E> {
 
 
 	public boolean addBefore(int index, String charB4) {
+		Node<E> temp = top;
+			Node<E> temp1;
+			Node<E> temp2;
 		// check for empty list
 		if (top == null) 
 			return false;
@@ -32,9 +35,7 @@ public class LinkedList<E> {
 			return true;
 		}
 		else {
-			Node<E> temp = top;
-			Node<E> temp1;
-			Node<E> temp2;
+			
 
 			int i = 0;
 			for(i=1;i< index;i++)
