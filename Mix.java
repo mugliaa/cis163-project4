@@ -3,6 +3,12 @@ package project4;
 import java.io.*;
 import java.util.*;
 
+/**********************************************************************
+ * A secret message program that will encrypt a message that the user
+ * entered using a given set of commands.
+ * @author Adam Muglia & Tyler Miller
+ * @version 23-Nov-2015
+ *********************************************************************/
 public class Mix implements iMix {
 	
 	/** Linked list of characters representing a message */
@@ -11,9 +17,18 @@ public class Mix implements iMix {
 	/** Listing of commands in reverse order */
 	private Stack<String> commands;
 	
+	/** Used for saving text removed to a 'clipboard' */
+	private String clipboard;
+	
+	/******************************************************************
+	 * Constructor for the Mix class. Creates a linked list that will 
+	 * store the secret message, saves the commands entered by the user,
+	 * and sets the clipboard to null.
+	 *****************************************************************/
 	public Mix() {
 		secretMessage = new LinkedList<Character>();
 		commands = new Stack<String>();
+		clipboard = null;
 	}
 
 	@Override
@@ -22,6 +37,23 @@ public class Mix implements iMix {
 		
 		// User wants to quit the program.
 		if (command.equals("Q")) {
+			// Checking if command is input properly
+			if (command.length() != 1) {
+				System.out.println("Invalid command entered! "
+						+ "Try again!");
+				System.out.println("");
+				secretMessage.display();
+				System.out.println("");
+				System.out.println("");
+				printCommandListing();
+				System.out.println("");
+				System.out.println("Command: ");
+				String c = s.nextLine();
+				System.out.println("");
+				processCommand(c);
+				s.close();
+				return null;
+			}
 			System.out.println("Closing program...");
 			System.out.println("Final Message:");
 			secretMessage.display();
@@ -31,14 +63,33 @@ public class Mix implements iMix {
 		
 		// User wants to insert a character before the specified position.
 		if (command.startsWith("b")) {
-			System.out.println(command);
+			// System.out.println(command);
 			String data[] = command.split(" ");
 
-			//System.out.println(temp[1]);
-			//System.out.println(temp[2]);
+			// System.out.println(temp[1]);
+			// System.out.println(temp[2]);
 			
-			if (data.length == 1) {
-				System.out.println("Invalid command entered! Try again!");
+			// Checking if command is input properly
+			if (data[0].length() != 1) {
+				System.out.println("Invalid command entered! "
+						+ "Try again!");
+				System.out.println("");
+				secretMessage.display();
+				System.out.println("");
+				System.out.println("");
+				printCommandListing();
+				System.out.println("");
+				System.out.println("Command: ");
+				String c = s.nextLine();
+				System.out.println("");
+				processCommand(c);
+				s.close();
+				return null;
+			}
+
+			if (data.length == 1 || data.length == 2) {
+				System.out.println("Invalid command entered! "
+						+ "Try again!");
 				System.out.println("");
 				secretMessage.display();
 				System.out.println("");
@@ -55,7 +106,8 @@ public class Mix implements iMix {
 			
 			// Checking if command was properly input
 			if (data[1].equals(null)) {
-				System.out.println("Invalid command entered! Try again!");
+				System.out.println("Invalid command entered! "
+						+ "Try again!");
 				System.out.println("");
 				secretMessage.display();
 				System.out.println("");
@@ -71,7 +123,8 @@ public class Mix implements iMix {
 			}
 			
 			if (data[1].equals("") || data[1].equals(" ")) {
-				System.out.println("Invalid command entered! Try again!");
+				System.out.println("Invalid command entered! "
+						+ "Try again!");
 				System.out.println("");
 				secretMessage.display();
 				System.out.println("");
@@ -86,8 +139,9 @@ public class Mix implements iMix {
 				return null;
 			}
 			
-			if (!isNumeric(data[1])) {
-				System.out.println("Invalid command entered! Try again!");
+			if (!isNumeric(data[2])) {
+				System.out.println("Invalid command entered! "
+						+ "Try again!");
 				System.out.println("");
 				secretMessage.display();
 				System.out.println("");
@@ -105,8 +159,9 @@ public class Mix implements iMix {
 			int index = Integer.parseInt(data[2]);
 			
 			// Checking if index is valid
-			if (index < 0 || index > secretMessage.count()) {
-				System.out.println("Invalid position entered! Try again!");
+			if (index < 0 || index >= secretMessage.count()) {
+				System.out.println("Invalid position entered! "
+						+ "Try again!");
 				System.out.println("");
 				secretMessage.display();
 				System.out.println("");
@@ -143,8 +198,27 @@ public class Mix implements iMix {
 			// Format: r #
 			String[] data = command.split(" ");
 			
+			// Checking if command is input properly
+			if (data[0].length() != 1) {
+				System.out.println("Invalid command entered! "
+						+ "Try again!");
+				System.out.println("");
+				secretMessage.display();
+				System.out.println("");
+				System.out.println("");
+				printCommandListing();
+				System.out.println("");
+				System.out.println("Command: ");
+				String c = s.nextLine();
+				System.out.println("");
+				processCommand(c);
+				s.close();
+				return null;
+			}
+			
 			if (data.length == 1) {
-				System.out.println("Invalid command entered! Try again!");
+				System.out.println("Invalid command entered! "
+						+ "Try again!");
 				System.out.println("");
 				secretMessage.display();
 				System.out.println("");
@@ -161,7 +235,8 @@ public class Mix implements iMix {
 			
 			// Checking if command was properly input
 			if (data[1].equals(null)) {
-				System.out.println("Invalid command entered! Try again!");
+				System.out.println("Invalid command entered! "
+						+ "Try again!");
 				System.out.println("");
 				secretMessage.display();
 				System.out.println("");
@@ -177,7 +252,8 @@ public class Mix implements iMix {
 			}
 			
 			if (data[1].equals("") || data[1].equals(" ")) {
-				System.out.println("Invalid command entered! Try again!");
+				System.out.println("Invalid command entered! "
+						+ "Try again!");
 				System.out.println("");
 				secretMessage.display();
 				System.out.println("");
@@ -193,7 +269,8 @@ public class Mix implements iMix {
 			}
 			
 			if (!isNumeric(data[1])) {
-				System.out.println("Invalid command entered! Try again!");
+				System.out.println("Invalid command entered! "
+						+ "Try again!");
 				System.out.println("");
 				secretMessage.display();
 				System.out.println("");
@@ -212,7 +289,8 @@ public class Mix implements iMix {
 			
 			// Checking if index is valid
 			if (index < 0 || index >= secretMessage.count()) {
-				System.out.println("Invalid position entered! Try again!");
+				System.out.println("Invalid position entered! "
+						+ "Try again!");
 				System.out.println("");
 				secretMessage.display();
 				System.out.println("");
@@ -242,13 +320,32 @@ public class Mix implements iMix {
 			return null;
 		}
 
-		// User wants to switch characters at the two specified positions.
+		// User wants to switch characters at the two positions.
 		if (command.startsWith("w")) {
 			// Format: w & #
 			String[] data = command.split(" ");
 
+			// Checking if command is input properly
+			if (data[0].length() != 1) {
+				System.out.println("Invalid command entered! "
+						+ "Try again!");
+				System.out.println("");
+				secretMessage.display();
+				System.out.println("");
+				System.out.println("");
+				printCommandListing();
+				System.out.println("");
+				System.out.println("Command: ");
+				String c = s.nextLine();
+				System.out.println("");
+				processCommand(c);
+				s.close();
+				return null;
+			}
+			
 			if (data.length == 1 || data.length == 2) {
-				System.out.println("Invalid command entered! Try again!");
+				System.out.println("Invalid command entered! "
+						+ "Try again!");
 				System.out.println("");
 				secretMessage.display();
 				System.out.println("");
@@ -265,7 +362,8 @@ public class Mix implements iMix {
 
 			// Checking if command was properly input
 			if (data[1].equals(null) || data[2].equals(null)) {
-				System.out.println("Invalid command entered! Try again!");
+				System.out.println("Invalid command entered! "
+						+ "Try again!");
 				System.out.println("");
 				secretMessage.display();
 				System.out.println("");
@@ -280,8 +378,10 @@ public class Mix implements iMix {
 				return null;
 			}
 
-			if (data[1].equals("") || data[1].equals(" ") || data[2].equals("") || data[2].equals(" ")) {
-				System.out.println("Invalid command entered! Try again!");
+			if (data[1].equals("") || data[1].equals(" ") || 
+					data[2].equals("") || data[2].equals(" ")) {
+				System.out.println("Invalid command entered! "
+						+ "Try again!");
 				System.out.println("");
 				secretMessage.display();
 				System.out.println("");
@@ -297,7 +397,8 @@ public class Mix implements iMix {
 			}
 
 			if (!isNumeric(data[1]) || !isNumeric(data[2])) {
-				System.out.println("Invalid command entered! Try again!");
+				System.out.println("Invalid command entered! "
+						+ "Try again!");
 				System.out.println("");
 				secretMessage.display();
 				System.out.println("");
@@ -311,14 +412,16 @@ public class Mix implements iMix {
 				s.close();
 				return null;
 			}
-
+			
+			// Setting values into variables
 			int index1 = Integer.parseInt(data[1]);
 			int index2 = Integer.parseInt(data[2]);
 
 			// Checking if index is valid
 			if (index1 < 0 || index1 > secretMessage.count() || 
 					index2 < 0 || index2 > secretMessage.count()) {
-				System.out.println("Invalid position entered! Try again!");
+				System.out.println("Invalid position entered! "
+						+ "Try again!");
 				System.out.println("");
 				secretMessage.display();
 				System.out.println("");
@@ -333,9 +436,17 @@ public class Mix implements iMix {
 				return null;
 			}
 			
-			// TODO: Switch characters here
-			
+			secretMessage.switchData(index1, index2);
 			commands.push(command);
+			secretMessage.display();
+			System.out.println("");
+			System.out.println("");
+			printCommandListing();
+			System.out.println("");
+			System.out.println("Command: ");
+			String c = s.nextLine();
+			System.out.println("");
+			processCommand(c);
 			s.close();
 			return null;
 		}
@@ -348,9 +459,124 @@ public class Mix implements iMix {
 			return null;
 		}
 		
-		// User wants to cut to the clipboard, starting at & to # (inclusive)
+		// User wants to cut to the clipboard, starting at & to #
 		if (command.startsWith("x")) {
 			// Format: x & #
+			String[] data = command.split(" ");
+			
+			// Checking if command is input properly
+			if (data[0].length() != 1) {
+				System.out.println("Invalid command entered! "
+						+ "Try again!");
+				System.out.println("");
+				secretMessage.display();
+				System.out.println("");
+				System.out.println("");
+				printCommandListing();
+				System.out.println("");
+				System.out.println("Command: ");
+				String c = s.nextLine();
+				System.out.println("");
+				processCommand(c);
+				s.close();
+				return null;
+			}
+
+			if (data.length == 1 || data.length == 2) {
+				System.out.println("Invalid command entered! "
+						+ "Try again!");
+				System.out.println("");
+				secretMessage.display();
+				System.out.println("");
+				System.out.println("");
+				printCommandListing();
+				System.out.println("");
+				System.out.println("Command: ");
+				String c = s.nextLine();
+				System.out.println("");
+				processCommand(c);
+				s.close();
+				return null;
+			}
+
+			// Checking if command was properly input
+			if (data[1].equals(null) || data[2].equals(null)) {
+				System.out.println("Invalid command entered! "
+						+ "Try again!");
+				System.out.println("");
+				secretMessage.display();
+				System.out.println("");
+				System.out.println("");
+				printCommandListing();
+				System.out.println("");
+				System.out.println("Command: ");
+				String c = s.nextLine();
+				System.out.println("");
+				processCommand(c);
+				s.close();
+				return null;
+			}
+
+			if (data[1].equals("") || data[1].equals(" ") || 
+					data[2].equals("") || data[2].equals(" ")) {
+				System.out.println("Invalid command entered! "
+						+ "Try again!");
+				System.out.println("");
+				secretMessage.display();
+				System.out.println("");
+				System.out.println("");
+				printCommandListing();
+				System.out.println("");
+				System.out.println("Command: ");
+				String c = s.nextLine();
+				System.out.println("");
+				processCommand(c);
+				s.close();
+				return null;
+			}
+
+			if (!isNumeric(data[1]) || !isNumeric(data[2])) {
+				System.out.println("Invalid command entered! "
+						+ "Try again!");
+				System.out.println("");
+				secretMessage.display();
+				System.out.println("");
+				System.out.println("");
+				printCommandListing();
+				System.out.println("");
+				System.out.println("Command: ");
+				String c = s.nextLine();
+				System.out.println("");
+				processCommand(c);
+				s.close();
+				return null;
+			}
+			
+			// Setting values into variables
+			int index1 = Integer.parseInt(data[1]);
+			int index2 = Integer.parseInt(data[2]);
+
+			// Checking if index is valid
+			if (index1 < 0 || index1 > secretMessage.count() || 
+					index2 < 0 || index2 > secretMessage.count()) {
+				System.out.println("Invalid position entered! "
+						+ "Try again!");
+				System.out.println("");
+				secretMessage.display();
+				System.out.println("");
+				System.out.println("");
+				printCommandListing();
+				System.out.println("");
+				System.out.println("Command: ");
+				String c = s.nextLine();
+				System.out.println("");
+				processCommand(c);
+				s.close();
+				return null;
+			}
+			
+			// TODO: cut to clipboard
+			
 			commands.push(command);
 			s.close();
 			return null;
@@ -398,15 +624,24 @@ public class Mix implements iMix {
 	}
 	
 	private void printCommandListing() {
-		System.out.println("The following commands are available to you: ");
-		System.out.println("Q \t\t Quits the program. Prints the final mixed up message.");
-		System.out.println("b c # \t\t Insert character (c) before position (#).");
-		System.out.println("r # \t\t Remove the character at position (#).");
-		System.out.println("w & # \t\t Switch character at position & with #.");
-		System.out.println("x & # \t\t Cut to clipboard; starting at position & to #.");
-		System.out.println("p # \t\t Paste from clipboard starting at position #.");
-		System.out.println("c & # \t\t Copy to clipboard starting at position & to #.");
-		System.out.println("s filename \t Save commands to a text file named 'filename'.");
+		System.out.println("The following commands are available to "
+				+ "you: ");
+		System.out.println("Q \t\t Quits the program. Prints the final "
+				+ "mixed up message.");
+		System.out.println("b c # \t\t Insert character (c) before "
+				+ "position (#).");
+		System.out.println("r # \t\t Remove the character at position "
+				+ "(#).");
+		System.out.println("w & # \t\t Switch character at position & "
+				+ "with #.");
+		System.out.println("x & # \t\t Cut to clipboard; starting at "
+				+ "position & to #.");
+		System.out.println("p # \t\t Paste from clipboard starting at "
+				+ "position #.");
+		System.out.println("c & # \t\t Copy to clipboard starting at "
+				+ "position & to #.");
+		System.out.println("s filename \t Save commands to a text file "
+				+ "named 'filename'.");
 	}
 	
 	private boolean isNumeric(String str) {
