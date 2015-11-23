@@ -20,8 +20,9 @@ public class LinkedList<E> {
 
 	public boolean addBefore(int index, String charB4) {
 		Node<E> temp = top;
-			Node<E> temp1;
-			Node<E> temp2;
+		Node<E> temp1;
+		Node<E> temp2;
+
 		// check for empty list
 		if (top == null) 
 			return false;
@@ -35,8 +36,6 @@ public class LinkedList<E> {
 			return true;
 		}
 		else {
-			
-
 			int i = 0;
 			for(i=1;i< index;i++)
 			{
@@ -206,72 +205,34 @@ public class LinkedList<E> {
 		return false;
 	}
 
-	public boolean delete (int index) {
+	public E delete (int index) {
 		// check for empty list
 		if (top == null) 
-			return false;
+			return null;
 
 		// check if top element is the target
 		if (index == 0) {
+			E data = top.getData();
 			top = top.getNext();
 			if (top.getNext() == null)
 				tail = null;
-			return true;
+			return data;
 		}
 
 		Node<E> temp = top;
 		int i = 0;
 		while (temp.getNext() != null) {
 			if ((i + 1) == index) {
+				E data = temp.getData();
 				temp.setNext(temp.getNext().getNext());
 				if (temp.getNext() == null)
 					tail = temp;
-				return true;
+				return data;
 			}
 			temp = temp.getNext();	
 			i ++;
 		}
 
-		return false;
+		return null;
 	}
-
-	public void deleteHalfWay() {
-
-
-	}
-
-
-	public static void main (String[] args){
-		//		LinkedList<Character> list = new 
-		//				LinkedList<String>();
-		//
-		//		list.addAtEnd("pizza1");
-		//		list.addfirst("pizza2");
-		//		list.addfirst("pizza3");
-		//		list.addfirst("pizza4");
-		//		list.addAtEnd("pizza5");
-		//
-		//		list.display();
-		//
-		//		list.delete("pizza1");
-		//		list.display();
-		//
-		//		list.delete("pizza2");
-		//		list.display();
-		//
-		//
-		//				list.addAtEnd("pizza11");
-		//
-		//				list.addfirst("pizza3");
-		//				list.addfirst("pizza4");
-		//				list.addfirst("pizza5");
-		//				list.addfirst("pizza6");
-		//				list.addfirst("pizza7");
-		//				list.addfirst("pizza8");
-		//				list.addAtEnd("pizza9");
-		//
-		//		list.display();
-
-	}
-
 }
