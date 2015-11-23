@@ -557,8 +557,8 @@ public class Mix implements iMix {
 			int index2 = Integer.parseInt(data[2]);
 
 			// Checking if index is valid
-			if (index1 < 0 || index1 > secretMessage.count() || 
-					index2 < 0 || index2 > secretMessage.count()) {
+			if (index1 < 0 || index1 >= secretMessage.count() || 
+					index2 < 0 || index2 >= secretMessage.count()) {
 				System.out.println("Invalid position entered! "
 						+ "Try again!");
 				System.out.println("");
@@ -575,9 +575,17 @@ public class Mix implements iMix {
 				return null;
 			}
 			
-			// TODO: cut to clipboard
-			
+			clipboard = secretMessage.cutFromList(index1, index2);
 			commands.push(command);
+			secretMessage.display();
+			System.out.println("");
+			System.out.println("");
+			printCommandListing();
+			System.out.println("");
+			System.out.println("Command: ");
+			String c = s.nextLine();
+			System.out.println("");
+			processCommand(c);
 			s.close();
 			return null;
 		}
