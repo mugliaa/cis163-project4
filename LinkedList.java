@@ -127,6 +127,31 @@ public class LinkedList<E> {
 		}
 		return copy;
 	}
+	
+	
+	public boolean pasteFromList(int index1, String clipboard) {
+
+		Node<E> temp = top;
+		Node<E> temp1;
+		
+		
+		int count = 0;
+
+		while (count != index1) {
+			temp = temp.getNext();
+			count++;
+		}
+		temp1 = temp.getNext();
+		String[] paste = clipboard.split("");
+		for (int i = 0; i < paste.length - 1; i++) {
+			temp1 = new Node<E>((E)paste[i], temp.getNext());
+
+            temp.next = temp1;
+
+            temp = temp1;
+		}
+		return true;
+	}
 
 	public void display() {
 		Node<E> temp = top;
