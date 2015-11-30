@@ -700,10 +700,24 @@ public class Mix implements iMix {
 			return null;
 		}
 
-		// User wants to paste from the clipboard starting at #
+			// User wants to paste from the clipboard starting at #
 		if (command.startsWith("p")) {
 			// Format: p #
+			
+			String[] data = command.split(" ");
+			String clipboard = this.clipboard;
+			secretMessage.pasteFromList(Integer.parseInt(data[1]), clipboard);
+			//System.out.println(clipboard);
 			commands.push(command);
+			secretMessage.display();
+			System.out.println("");
+			System.out.println("");
+			printCommandListing();
+			System.out.println("");
+			System.out.println("Command: ");
+			String c = s.nextLine();
+			System.out.println("");
+			processCommand(c);
 			s.close();
 			return null;
 		}
