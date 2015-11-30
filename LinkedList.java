@@ -181,6 +181,17 @@ public class LinkedList<E> {
 			count ++;
 		}
 	}
+	
+	public String displayMessage() {
+		Node<E> temp = top;
+		String display = "";
+		while (temp != null) {
+			// System.out.print(counter + " ");
+					display += temp.getData();
+					temp = temp.getNext();
+		}
+		return display;
+	}
 
 	public int count() {
 		int count = 0;
@@ -248,7 +259,7 @@ public class LinkedList<E> {
 		int i = 0;
 		while (temp.getNext() != null) {
 			if ((i + 1) == index) {
-				E data = temp.getData();
+				E data = temp.getNext().getData();
 				temp.setNext(temp.getNext().getNext());
 				if (temp.getNext() == null)
 					tail = temp;
