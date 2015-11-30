@@ -12,7 +12,7 @@ import java.util.*;
 public class Mix implements iMix {
 
 	/** Linked list of characters representing a message */
-	private LinkedList<Character> secretMessage;
+	public LinkedList<Character> secretMessage;
 
 	/** Listing of commands in reverse order */
 	private Stack<String> commands;
@@ -184,7 +184,7 @@ public class Mix implements iMix {
 			// Format: b c #
 
 			secretMessage.addBefore(Integer.parseInt(data[2]), data[1]);
-			commands.push(command);
+			commands.push(convertCommand(command, null, null));
 			secretMessage.display();
 			System.out.println("");
 			System.out.println("");
@@ -311,7 +311,7 @@ public class Mix implements iMix {
 			}
 
 			Character deleted = secretMessage.delete(index);
-			commands.push(command + "|" + deleted);
+			commands.push(convertCommand(command, deleted, null));
 			secretMessage.display();
 			System.out.println("");
 			System.out.println("");
@@ -686,7 +686,7 @@ public class Mix implements iMix {
 			}
 
 			clipboard = secretMessage.cutFromList(index1, index2);
-			commands.push(command);
+			commands.push(convertCommand(command, null, clipboard));
 			secretMessage.display();
 			System.out.println("");
 			System.out.println("");
@@ -708,7 +708,7 @@ public class Mix implements iMix {
 			String clipboard = this.clipboard;
 			secretMessage.pasteFromList(Integer.parseInt(data[1]), clipboard);
 			//System.out.println(clipboard);
-			commands.push(command);
+			commands.push(convertCommand(command, null, clipboard));
 			secretMessage.display();
 			System.out.println("");
 			System.out.println("");
@@ -869,6 +869,29 @@ public class Mix implements iMix {
 		return null;
 	}
 
+	private String convertCommand(String command, Character deleted, String clipboard) {
+		String[] split = command.split(" ");
+		
+		if (split[0].equals("b")) {
+			return "r " + split[2];
+		}
+		
+		if (split[0].equals("r")) {
+			return "b " + deleted + " " + split[1];
+		}
+		
+		if (split[0].equals("x")) {
+			return "p " + split[1];
+		}
+
+		if (split[0].equals("p")) {
+			return "x " + split[1] + " " + (Integer.parseInt(split[1]) + 
+					clipboard.length() - 1);
+		}
+
+		return null;
+	}
+	
 	@Override
 	/******************************************************************
 	 * Sets the initial secret message entered by the user.
@@ -921,6 +944,10 @@ public class Mix implements iMix {
 			return false;  
 		}  
 		return true;  
+	}
+	
+	public String display() {
+		return secretMessage.displayMessage();
 	}
 
 	/******************************************************************
