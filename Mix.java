@@ -35,7 +35,7 @@ public class Mix implements iMix {
 	/******************************************************************
 	 * Processes the user's command and changes the secret message.
 	 * @param command the command entered by the user
-	 * @return output of the command
+	 * @return output of the command; null if invalid
 	 *****************************************************************/
 	public String processCommand(String command) {
 		Scanner s = new Scanner(new InputStreamReader(System.in));
@@ -68,12 +68,9 @@ public class Mix implements iMix {
 
 		// User wants to insert a character before the position.
 		if (command.startsWith("b")) {
-			// System.out.println(command);
+			// Format: b c #
 			String data[] = command.split(" ");
-
-			// System.out.println(temp[1]);
-			// System.out.println(temp[2]);
-
+			
 			// Checking if command is input properly
 			if (data[0].length() != 1) {
 				System.out.println("Invalid command entered! "
@@ -144,6 +141,7 @@ public class Mix implements iMix {
 				return null;
 			}
 
+			// Checking if third element is numeric
 			if (!isNumeric(data[2])) {
 				System.out.println("Invalid command entered! "
 						+ "Try again!");
@@ -181,9 +179,8 @@ public class Mix implements iMix {
 				return null;
 			}
 
-			// Format: b c #
-
 			secretMessage.addBefore(Integer.parseInt(data[2]), data[1]);
+			// Converting command and putting into stack
 			commands.push(convertCommand(command, null, null));
 			secretMessage.display();
 			System.out.println("");
@@ -193,6 +190,7 @@ public class Mix implements iMix {
 			System.out.println("Command: ");
 			String c = s.nextLine();
 			System.out.println("");
+			// Prompt user again
 			processCommand(c);
 			s.close();
 			return null;
@@ -273,6 +271,7 @@ public class Mix implements iMix {
 				return null;
 			}
 
+			// Checking is second element is numeric
 			if (!isNumeric(data[1])) {
 				System.out.println("Invalid command entered! "
 						+ "Try again!");
@@ -310,7 +309,10 @@ public class Mix implements iMix {
 				return null;
 			}
 
+			// Delete at specified index and store character
 			Character deleted = secretMessage.delete(index);
+			
+			// Convert command and add to stack
 			commands.push(convertCommand(command, deleted, null));
 			secretMessage.display();
 			System.out.println("");
@@ -320,6 +322,7 @@ public class Mix implements iMix {
 			System.out.println("Command: ");
 			String c = s.nextLine();
 			System.out.println("");
+			// Prompt user for input again
 			processCommand(c);
 			s.close();
 			return null;
@@ -401,6 +404,7 @@ public class Mix implements iMix {
 				return null;
 			}
 
+			// Checking if second and third elements are numeric
 			if (!isNumeric(data[1]) || !isNumeric(data[2])) {
 				System.out.println("Invalid command entered! "
 						+ "Try again!");
@@ -441,8 +445,12 @@ public class Mix implements iMix {
 				return null;
 			}
 
+			// Switches data at the two indexes
 			secretMessage.switchData(index1, index2);
+			
+			// Command does not need to be converted
 			commands.push(command);
+			
 			secretMessage.display();
 			System.out.println("");
 			System.out.println("");
@@ -451,6 +459,7 @@ public class Mix implements iMix {
 			System.out.println("Command: ");
 			String c = s.nextLine();
 			System.out.println("");
+			// Prompt the user again
 			processCommand(c);
 			s.close();
 			return null;
@@ -531,11 +540,16 @@ public class Mix implements iMix {
 				return null;
 			}
 			
+			// Stores the information being written to the file
 			String fileCommands = "";
+			
+			// Takes commands from Stack and appends to String
+			// Separated by lines
 			while (!commands.isEmpty()) {
 				fileCommands += commands.pop() + "\n";
 			}
 			
+			// Write to the text file
 			try {
 				PrintWriter out = new PrintWriter(data[1] + ".txt");
 				out.println(fileCommands);
@@ -564,6 +578,7 @@ public class Mix implements iMix {
 			System.out.println("Command: ");
 			String c = s.nextLine();
 			System.out.println("");
+			// Prompt the user again
 			processCommand(c);
 			s.close();
 			return null;
@@ -645,6 +660,7 @@ public class Mix implements iMix {
 				return null;
 			}
 
+			// Checks if second and third elements are numeric
 			if (!isNumeric(data[1]) || !isNumeric(data[2])) {
 				System.out.println("Invalid command entered! "
 						+ "Try again!");
@@ -685,8 +701,12 @@ public class Mix implements iMix {
 				return null;
 			}
 
+			// Cuts from the LinkedList and saves to clipboard
 			clipboard = secretMessage.cutFromList(index1, index2);
+			
+			// Converts command and adds to Stack
 			commands.push(convertCommand(command, null, clipboard));
+			
 			secretMessage.display();
 			System.out.println("");
 			System.out.println("");
@@ -695,16 +715,17 @@ public class Mix implements iMix {
 			System.out.println("Command: ");
 			String c = s.nextLine();
 			System.out.println("");
+			// Prompt the user again
 			processCommand(c);
 			s.close();
 			return null;
 		}
 
-			// User wants to paste from the clipboard starting at #
+		// User wants to paste from the clipboard starting at #
 		if (command.startsWith("p")) {
 			// Format: p #
 			String[] data = command.split(" ");
-			
+
 			if (data[0].length() != 1) {
 				System.out.println("Invalid command entered! "
 						+ "Try again!");
@@ -775,6 +796,7 @@ public class Mix implements iMix {
 				return null;
 			}
 
+			// Checks if second element is numeric
 			if (!isNumeric(data[1])) {
 				System.out.println("Invalid command entered! "
 						+ "Try again!");
@@ -814,6 +836,7 @@ public class Mix implements iMix {
 				return null;
 			}
 			
+			// Checks if clipboard is empty
 			if (this.clipboard == null || this.clipboard.length() == 0){
 				System.out.println("Clipboard is empty! "
 						+ "Try again!");
@@ -831,10 +854,14 @@ public class Mix implements iMix {
 				return null;
 			}
 			
+			// Saves the clipboard to a temporary variable
 			String clipboard = this.clipboard;
+			
+			// Pastes the clipboard to the LinkedList at specified pos
 			secretMessage.pasteFromList(Integer.parseInt(data[1]), 
 					clipboard);
-			//System.out.println(clipboard);
+			
+			// Converts the command and adds to the Stack
 			commands.push(convertCommand(command, null, clipboard));
 			secretMessage.display();
 			System.out.println("");
@@ -844,6 +871,7 @@ public class Mix implements iMix {
 			System.out.println("Command: ");
 			String c = s.nextLine();
 			System.out.println("");
+			// Prompts the user again
 			processCommand(c);
 			s.close();
 			return null;
@@ -925,6 +953,7 @@ public class Mix implements iMix {
 				return null;
 			}
 
+			// Checks if the second and third element are numeric
 			if (!isNumeric(data[1]) || !isNumeric(data[2])) {
 				System.out.println("Invalid command entered! "
 						+ "Try again!");
@@ -965,8 +994,12 @@ public class Mix implements iMix {
 				return null;
 			}
 
+			// Copies the specified range to the clipboard
 			clipboard = secretMessage.copyFromList(index1, index2);
+			
+			// Adds the command to the Stack
 			commands.push(command);
+			
 			secretMessage.display();
 			System.out.println("");
 			System.out.println("");
@@ -975,6 +1008,7 @@ public class Mix implements iMix {
 			System.out.println("Command: ");
 			String c = s.nextLine();
 			System.out.println("");
+			// Prompt the user for input again
 			processCommand(c);
 			s.close();
 			return null;
@@ -996,27 +1030,42 @@ public class Mix implements iMix {
 		return null;
 	}
 
+	/******************************************************************
+	 * Helper method that converts an input command to be added to the
+	 * Stack for later use in UnMix.
+	 * @param command user inputed command being converted
+	 * @param deleted character removed, if relevant
+	 * @param clipboard data for pasting, if relevant
+	 * @return the converted command
+	 *****************************************************************/
 	private String convertCommand(String command, Character deleted, 
 			String clipboard) {
+		
+		// Split the command into sections by a space delimiter
 		String[] split = command.split(" ");
 		
+		// Converts b to r
 		if (split[0].equals("b")) {
 			return "r " + split[2];
 		}
 		
+		// Converts r to b
 		if (split[0].equals("r")) {
 			return "b " + deleted + " " + split[1];
 		}
 		
+		// Converts x to p
 		if (split[0].equals("x")) {
 			return "p " + split[1] + "|" + clipboard;
 		}
 
+		// Converts p to x
 		if (split[0].equals("p")) {
 			return "x " + split[1] + " " + (Integer.parseInt(split[1]) + 
 					clipboard.length() - 1);
 		}
 
+		// Invalid data
 		return null;
 	}
 	
@@ -1027,6 +1076,8 @@ public class Mix implements iMix {
 	 *****************************************************************/
 	public void setInitialMessage(String message) {
 		int index = 0;
+		
+		// Takes the initial message and adds it character-by-character
 		while (message.length() != index) {
 			secretMessage.addAtEnd(message.charAt(index));
 			index += 1;
