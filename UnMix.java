@@ -11,31 +11,51 @@ public class UnMix implements iUnMix {
 	/** Used for saving text removed to a 'clipboard' */
 	private String clipboard;
 	
+	/******************************************************************
+	 * Constructor for the UnMix class. Creates a linked list to store
+	 * the initial encrypted message and a clipboard for paste data.
+	 *****************************************************************/
 	public UnMix() {
 		iMessage = new LinkedList<Character>();
 		clipboard = null;
 	}
 	
 	@Override
+	/******************************************************************
+	 * UnMixs the given message using the specified file containing
+	 * information for decryption.
+	 * @param fileName name of the file storing decryption information
+	 * @param userMessage the encrypted message
+	 * @return the decrypted String
+	 *****************************************************************/
 	public String UnMixUsingFile(String filename, String userMessage) {
-		// TODO Auto-generated method stub
+		// Sets the initial encrypted message into a Linked List
 		setMessage(userMessage);
+		
+		// Reads file and processes all commands
 		return readFile(filename);
 	}
-
+	
+	/******************************************************************
+	 * Helper method used to process a given command.
+	 * @param command the command issued to the Linked List
+	 *****************************************************************/
 	private void processCommand(String command) {
 		try {
+			// Deals with b command (insert)
 			if (command.startsWith("b")) {
 				String data[] = command.split(" ");
 				iMessage.addBefore(Integer.parseInt(data[2]), data[1]);
 			}
-
+			
+			// Deals with r command (delete)
 			if (command.startsWith("r")) {
 				String data[] = command.split(" ");
 				int index = Integer.parseInt(data[1]);
 				iMessage.delete(index);
 			}
 
+			// Deals with w command (swap)
 			if (command.startsWith("w")) {
 				String data[] = command.split(" ");
 				int index1 = Integer.parseInt(data[1]);
@@ -43,6 +63,7 @@ public class UnMix implements iUnMix {
 				iMessage.switchData(index1, index2);
 			}
 
+			// Deals with x command (cut)
 			if (command.startsWith("x")) {
 				String data[] = command.split(" ");
 				int index1 = Integer.parseInt(data[1]);
@@ -50,6 +71,7 @@ public class UnMix implements iUnMix {
 				iMessage.cutFromList(index1, index2);
 			}
 
+			// Deals with p command (paste)
 			if (command.startsWith("p")) {
 				String clipSplit[] = command.split("\\|");
 				String clipboard = clipSplit[1];
@@ -59,6 +81,7 @@ public class UnMix implements iUnMix {
 			}
 		}
 		catch (Exception e) {
+			// Gracefully exits program
 			System.out.println("Error decrypting file!");
 		}
 	}
@@ -69,12 +92,20 @@ public class UnMix implements iUnMix {
 	 *****************************************************************/
 	public void setMessage(String message) {
 		int index = 0;
+		
+		// Stores the initial encrypted message into a Linked List
 		while (message.length() != index) {
 			iMessage.addAtEnd(message.charAt(index));
 			index += 1;
 		}
 	}
 	
+	/******************************************************************
+	 * Reads the file entered by the user and processes each command to
+	 * decrypt the Linked List. Returns the decrypted String.
+	 * @param filename the decryption file provided by the user
+	 * @return the decrypted String
+	 *****************************************************************/
 	private String readFile(String filename) {
 		try {
 			// Create object of FileReader
@@ -97,6 +128,7 @@ public class UnMix implements iUnMix {
 			return iMessage.displayMessage();
 		}
 		catch(Exception e) {
+			// Gracefully exits the program
 			System.out.println("Error while reading file line by line:"
 					+ " " + e.getMessage());                      
 		}
@@ -104,6 +136,10 @@ public class UnMix implements iUnMix {
 		return null;
 	}
 
+	/******************************************************************
+	 * UnMix program that decrypts a secret message using a file and
+	 * encrypted message.
+	 *****************************************************************/
 	public static void main(String[] args) {
 		// Scans user input
 		Scanner s = new Scanner(System.in);
@@ -112,16 +148,20 @@ public class UnMix implements iUnMix {
 		System.out.println("Welcome to the un-mixer!");
 		System.out.println("Please enter your file name:");
 		
+		// Stores the file name into a temporary variable
 		String filename = s.nextLine();
 		
 		System.out.println("");
 		System.out.println("Please enter the secret message:");
 		
+		// Stores the message into a temporary variable
 		String message = s.nextLine();
 		
 		System.out.println("");
 		System.out.println("Decrypting...");
 		System.out.println("The secret message was:");
+		
+		// Decrypted message
 		System.out.println(un.UnMixUsingFile(filename, message));
 		
 	}
