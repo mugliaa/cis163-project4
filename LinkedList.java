@@ -1,6 +1,5 @@
 package project4;
 
-
 public class LinkedList<E> {
 	private Node<E> top;
 	private Node<E> tail;
