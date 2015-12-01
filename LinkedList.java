@@ -133,24 +133,48 @@ public class LinkedList<E> {
 
 		Node<E> temp = top;
 		Node<E> temp1;
-		
-		
+		String[] paste = clipboard.split("");
+
+		if (temp == null)
+			return false;
+
 		int count = 0;
 
-		while (count != index1) {
-			temp = temp.getNext();
-			count++;
-		}
-		temp1 = temp.getNext();
-		String[] paste = clipboard.split("");
-		for (int i = 0; i < paste.length - 1; i++) {
-			temp1 = new Node<E>((E)paste[i], temp.getNext());
+		int i = 0;
+		if (index1 == 0) {
+			
+			temp1 = temp;
+			
+			while (i < paste.length) {
 
-            temp.next = temp1;
+				temp1 = new Node<E>((E) paste[i++], temp.getNext());
 
-            temp = temp1;
+				temp.next = temp1;
+
+				temp = temp1;
+
+			}
+		} else {
+
+			count = 0;
+
+			while (count != index1 - 1) {
+				temp = temp.getNext();
+				count++;
+			}
+
+			temp1 = temp;
+
+			for (i = 0; i < paste.length; i++) {
+				temp1 = new Node<E>((E) paste[i], temp.getNext());
+
+				temp.next = temp1;
+
+				temp = temp1;
+			}
 		}
 		return true;
+
 	}
 
 	public void display() {
