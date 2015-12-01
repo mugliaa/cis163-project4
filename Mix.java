@@ -61,7 +61,7 @@ public class Mix implements iMix {
 			}
 			System.out.println("Closing program...");
 			System.out.println("Final Message:");
-			secretMessage.display();
+			System.out.println(secretMessage.displayMessage());
 			s.close();
 			return null;
 		}
@@ -814,7 +814,7 @@ public class Mix implements iMix {
 				return null;
 			}
 			
-			if (this.clipboard == null || this.clipboard.length() == 0) {
+			if (this.clipboard == null || this.clipboard.length() == 0){
 				System.out.println("Clipboard is empty! "
 						+ "Try again!");
 				System.out.println("");
@@ -832,9 +832,10 @@ public class Mix implements iMix {
 			}
 			
 			String clipboard = this.clipboard;
-			secretMessage.pasteFromList(Integer.parseInt(data[1]), clipboard);
+			secretMessage.pasteFromList(Integer.parseInt(data[1]), 
+					clipboard);
 			//System.out.println(clipboard);
-			commands.push(command);
+			commands.push(convertCommand(command, null, clipboard));
 			secretMessage.display();
 			System.out.println("");
 			System.out.println("");
@@ -995,7 +996,8 @@ public class Mix implements iMix {
 		return null;
 	}
 
-	private String convertCommand(String command, Character deleted, String clipboard) {
+	private String convertCommand(String command, Character deleted, 
+			String clipboard) {
 		String[] split = command.split(" ");
 		
 		if (split[0].equals("b")) {
@@ -1007,7 +1009,7 @@ public class Mix implements iMix {
 		}
 		
 		if (split[0].equals("x")) {
-			return "p " + split[1];
+			return "p " + split[1] + "|" + clipboard;
 		}
 
 		if (split[0].equals("p")) {
@@ -1070,10 +1072,6 @@ public class Mix implements iMix {
 			return false;  
 		}  
 		return true;  
-	}
-	
-	public String display() {
-		return secretMessage.displayMessage();
 	}
 
 	/******************************************************************
