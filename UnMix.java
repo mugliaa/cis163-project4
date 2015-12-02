@@ -3,6 +3,12 @@ package project4;
 import java.io.*;
 import java.util.*;
 
+/**********************************************************************
+ * A decryption program that takes in a file and encrypted message and
+ * reveals its secrets
+ * @author Adam Muglia & Tyler Miller
+ * @version 2-Dec-2015
+ *********************************************************************/
 public class UnMix implements iUnMix {
 	
 	/** Linked list of characters representing the initial message */
@@ -108,12 +114,14 @@ public class UnMix implements iUnMix {
 	 * Reads the file entered by the user and processes each command to
 	 * decrypt the Linked List. Returns the decrypted String.
 	 * @param filename the decryption file provided by the user
-	 * @return the decrypted String
+	 * @return the decrypted String; null if error
 	 *****************************************************************/
 	private String readFile(String filename) {
 		try {
+			// Sets the file name into a temporary variable
 			String name = filename;
 			
+			// Adds a file extension if needed
 			if (!filename.endsWith(".txt")) {
 				name += ".txt";
 			}
@@ -137,6 +145,7 @@ public class UnMix implements iUnMix {
 			
 			return iMessage.displayMessage();
 		}
+		
 		catch(Exception e) {
 			// Gracefully exits the program
 			System.out.println("Error while reading file line by line:"
@@ -147,8 +156,8 @@ public class UnMix implements iUnMix {
 	}
 
 	/******************************************************************
-	 * UnMix program that decrypts a secret message using a file and
-	 * encrypted message.
+	 * UnMix program that decrypts a secret message using a command 
+	 * file and encrypted message.
 	 *****************************************************************/
 	public static void main(String[] args) {
 		// Scans user input
