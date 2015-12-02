@@ -340,6 +340,25 @@ public class Mix implements iMix {
 				s.close();
 				return null;
 			}
+			
+			if (secretMessage.displayMessage().length() == 1) {
+				if (testing == true) 
+					return null;
+				System.out.println("Cannot fully delete message! "
+						+ "Try again!");
+				System.out.println("");
+				secretMessage.display();
+				System.out.println("");
+				System.out.println("");
+				printCommandListing();
+				System.out.println("");
+				System.out.println("Command: ");
+				String c = s.nextLine();
+				System.out.println("");
+				processCommand(c);
+				s.close();
+				return null;
+			}
 
 			// Delete at specified index and store character
 			char deleted = secretMessage.delete(index);
