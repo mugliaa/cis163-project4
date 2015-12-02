@@ -834,7 +834,7 @@ public class MixTest {
 	}
 
 	@Test
-	// Testing
+	// Testing for general errors
 	public void testError() {
 		Mix m = new Mix();
 		m.testing = true;
@@ -846,7 +846,7 @@ public class MixTest {
 	}
 
 	@Test
-	// Testing
+	// Testing for errors
 	public void testError2() {
 		Mix m = new Mix();
 		m.testing = true;
@@ -859,7 +859,7 @@ public class MixTest {
 
 	@Test
 	// Testing
-	public void testError3() {
+	public void testErrorandUnmix() {
 		Mix m = new Mix();
 		UnMix u = new UnMix();
 		m.testing = true;
@@ -871,5 +871,187 @@ public class MixTest {
 		assertEquals("Hello World", u.UnMixUsingFile
 								("dsafhsauipuadshfiuh.sadasfdasf", 
 												"Hello World"));
+	}
+	@Test
+	// Testing Unmix with commands
+	public void testUnmixFunctionality() {
+		Mix m = new Mix();
+		UnMix u = new UnMix();
+		m.testing = true;
+		m.setInitialMessage("Hello World");
+		m.processCommand("r 0");
+		m.processCommand("s filename");
+		assertEquals("Hello World", u.UnMixUsingFile("filename", "ello World" ));
+	}
+	
+	@Test
+	// Testing Unmix with commands
+	public void testUnmixFunctionality2() {
+		Mix m = new Mix();
+		UnMix u = new UnMix();
+		m.testing = true;
+		m.setInitialMessage("Hello World");
+		m.processCommand("w 0 1");
+		m.processCommand("s filename");
+		assertEquals("Hello World", u.UnMixUsingFile("filename", "eHllo World" ));
+	}
+	
+	@Test
+	// Testing Unmix with commands
+	public void testUnmixFunctionality3() {
+		Mix m = new Mix();
+		UnMix u = new UnMix();
+		m.testing = true;
+		m.setInitialMessage("Hello World");
+		m.processCommand("c 0 1");
+		m.processCommand("p 3");
+		m.processCommand("s filename");
+		assertEquals("Hello World", u.UnMixUsingFile("filename", "HelHelo World" ));
+	
+	}
+	
+	@Test
+	// Testing Unmix with commands
+	public void testUnmixFunctionality4() {
+		Mix m = new Mix();
+		UnMix u = new UnMix();
+		m.testing = true;
+		m.setInitialMessage("Hello World");
+		m.processCommand("x 0 1");
+		m.processCommand("p 3");
+		m.processCommand("s filename");
+		assertEquals("Hello World", u.UnMixUsingFile("filename", "lloHe World" ));
+	
+	}
+	
+	@Test
+	// Testing Unmix with commands
+	public void testUnmixFunctionality5() {
+		Mix m = new Mix();
+		UnMix u = new UnMix();
+		m.testing = true;
+		m.setInitialMessage("Hello World");
+		m.processCommand("b 0 1");
+		m.processCommand("s filename");
+		assertEquals("Hello World", u.UnMixUsingFile("filename", "H0ello World" ));
+	
+	}
+	
+	@Test
+	// Testing Unmix with commands
+	public void testUnmixFunctionality6() {
+		Mix m = new Mix();
+		UnMix u = new UnMix();
+		m.testing = true;
+		m.setInitialMessage("Hello World");
+		m.processCommand("b 0 1");
+		m.processCommand("s filename");
+		assertEquals("Hello World", u.UnMixUsingFile("filename", "H0ello World" ));
+	
+	}
+	
+	@Test
+	// Testing Unmix with commands
+	public void testUnmixFunctionalityMultiple() {
+		Mix m = new Mix();
+		UnMix u = new UnMix();
+		m.testing = true;
+		m.setInitialMessage("Hello World");
+		m.processCommand("b 0 1");
+		m.processCommand("b Q 4");
+		m.processCommand("s filename");
+		assertEquals("Hello World", u.UnMixUsingFile("filename", "H0elQlo World" ));
+	
+	}
+	
+	@Test
+	// Testing Unmix with commands
+	public void testUnmixFunctionalityMultiple2() {
+		Mix m = new Mix();
+		UnMix u = new UnMix();
+		m.testing = true;
+		m.setInitialMessage("Hello World");
+		m.processCommand("b 0 1");
+		m.processCommand("b Q 4");
+		m.processCommand("r 0");
+		m.processCommand("r 0");
+		m.processCommand("s filename");
+		assertEquals("Hello World", u.UnMixUsingFile("filename", "elQlo World" ));
+	
+	}
+	
+	@Test
+	// Testing Unmix with commands
+	public void testUnmixFunctionalityMultiple3() {
+		Mix m = new Mix();
+		UnMix u = new UnMix();
+		m.testing = true;
+		m.setInitialMessage("Hello World");
+		m.processCommand("b 0 1");
+		m.processCommand("b Q 4");
+		m.processCommand("r 0");
+		m.processCommand("r 0");
+		m.processCommand("x 0 4");
+		m.processCommand("s filename");
+		assertEquals("Hello World", u.UnMixUsingFile("filename", " World" ));
+	
+	}
+	
+	@Test
+	// Testing Unmix with commands
+	public void testUnmixFunctionalityMultiple4() {
+		Mix m = new Mix();
+		UnMix u = new UnMix();
+		m.testing = true;
+		m.setInitialMessage("Hello World");
+		m.processCommand("b 0 1");
+		m.processCommand("b Q 4");
+		m.processCommand("r 0");
+		m.processCommand("r 0");
+		m.processCommand("x 0 4");
+		m.processCommand("p 5");
+		m.processCommand("s filename");
+		assertEquals("Hello World", u.UnMixUsingFile("filename", " WorlelQlod" ));
+	
+	}
+	
+	
+	@Test
+	// Testing Unmix with commands
+	public void testUnmixFunctionalityMultiple5() {
+		Mix m = new Mix();
+		UnMix u = new UnMix();
+		m.testing = true;
+		m.setInitialMessage("Hello World");
+		m.processCommand("b 0 1");
+		m.processCommand("b Q 4");
+		m.processCommand("r 0");
+		m.processCommand("r 0");
+		m.processCommand("x 0 4");
+		m.processCommand("p 5");
+		m.processCommand("w 0 10");
+		m.processCommand("s filename");
+		assertEquals("Hello World", u.UnMixUsingFile("filename", "dWorlelQlo " ));
+	
+	}
+	@Test
+	// Testing Unmix with commands
+	public void testUnmixFunctionalityMultiple6() {
+		Mix m = new Mix();
+		UnMix u = new UnMix();
+		m.testing = true;
+		m.setInitialMessage("Hello World");
+		m.processCommand("b 0 1");
+		m.processCommand("b Q 4");
+		m.processCommand("r 0");
+		m.processCommand("r 0");
+		m.processCommand("x 0 4");
+		m.processCommand("p 5");
+		m.processCommand("w 0 10");
+		m.processCommand("c 0 10");
+		m.processCommand("p 10");
+		m.processCommand("s filename");
+		assertEquals("Hello World", u.UnMixUsingFile("filename", "dWorlelQlo dWorlelQlo " ));
+	
 	}
 }
