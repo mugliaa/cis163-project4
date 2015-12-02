@@ -202,7 +202,8 @@ public class MixTest {
 		m.testing = true;
 		m.setInitialMessage("This is a test");
 		m.processCommand("b c 4");
-		assertEquals("Thisc is a test", m.secretMessage.displayMessage());
+		assertEquals("Thisc is a test", 
+				m.secretMessage.displayMessage());
 	}
 
 	@Test
@@ -212,7 +213,8 @@ public class MixTest {
 		m.testing = true;
 		m.setInitialMessage("This is a test");
 		m.processCommand("b 7 8");
-		assertEquals("This is 7a test", m.secretMessage.displayMessage());
+		assertEquals("This is 7a test", 
+				m.secretMessage.displayMessage());
 	}
 
 	@Test
@@ -275,7 +277,8 @@ public class MixTest {
 		m.processCommand("b i 5");
 		m.processCommand("b s 6");
 		m.processCommand("b t 7");
-		assertEquals("Thissist is a test", m.secretMessage.displayMessage());
+		assertEquals("Thissist is a test", 
+				m.secretMessage.displayMessage());
 	}
 
 	@Test
@@ -344,7 +347,8 @@ public class MixTest {
 		m.processCommand("p 0");
 		m.processCommand("c 0 9");
 		m.processCommand("p 1");
-		assertEquals("  is a testis a test", m.secretMessage.displayMessage());
+		assertEquals("  is a testis a test", 
+				m.secretMessage.displayMessage());
 	}
 
 	@Test
@@ -411,7 +415,8 @@ public class MixTest {
 		m.processCommand("r 1");
 		m.processCommand("c 0 3");
 		m.processCommand("p 0");
-		assertEquals("Tis Tis is a test", m.secretMessage.displayMessage());
+		assertEquals("Tis Tis is a test", 
+				m.secretMessage.displayMessage());
 	}
 
 	@Test
@@ -426,7 +431,8 @@ public class MixTest {
 		m.processCommand("r 4");
 		m.processCommand("r 8");
 		m.processCommand("b 5 3");
-		assertEquals("Tis5 is i a test", m.secretMessage.displayMessage());
+		assertEquals("Tis5 is i a test", 
+				m.secretMessage.displayMessage());
 	}
 
 	@Test
@@ -442,7 +448,8 @@ public class MixTest {
 		m.processCommand("r 8");
 		m.processCommand("b 5 3");
 		m.processCommand("w 0 15");
-		assertEquals("tis5 is i a tesT", m.secretMessage.displayMessage());
+		assertEquals("tis5 is i a tesT", 
+				m.secretMessage.displayMessage());
 	}
 
 	@Test
@@ -593,7 +600,8 @@ public class MixTest {
 		m.processCommand("w 0 2"); // lHelo World
 		m.processCommand("c 0 4");
 		m.processCommand("p 2"); // lHlHeloelo World
-		assertEquals("lHlHeloelo World", m.secretMessage.displayMessage());
+		assertEquals("lHlHeloelo World", 
+				m.secretMessage.displayMessage());
 	}
 
 	@Test
@@ -767,7 +775,8 @@ public class MixTest {
 		m.processCommand("s testit");
 		m.processCommand("Q");
 
-		assertEquals("Adam Muglia", u.UnMixUsingFile("testit", "lam dia"));
+		assertEquals("Adam Muglia", 
+				u.UnMixUsingFile("testit", "lam dia"));
 	}
 
 	@Test
@@ -783,7 +792,8 @@ public class MixTest {
 		m.processCommand("s testit");
 		m.processCommand("Q");
 
-		assertEquals("This is a test", u.UnMixUsingFile("testit", " hisTa est"));
+		assertEquals("This is a test", 
+				u.UnMixUsingFile("testit", " hisTa est"));
 	}
 
 	@Test
@@ -800,7 +810,8 @@ public class MixTest {
 		m.processCommand("s testit");
 		m.processCommand("Q");
 
-		assertEquals("Hello world", u.UnMixUsingFile("testit", "Hel oworld"));
+		assertEquals("Hello world", 
+				u.UnMixUsingFile("testit", "Hel oworld"));
 	}
 
 	@Test
@@ -881,7 +892,8 @@ public class MixTest {
 		m.setInitialMessage("Hello World");
 		m.processCommand("r 0");
 		m.processCommand("s filename");
-		assertEquals("Hello World", u.UnMixUsingFile("filename", "ello World" ));
+		assertEquals("Hello World", 
+				u.UnMixUsingFile("filename", "ello World" ));
 	}
 	
 	@Test
@@ -893,7 +905,8 @@ public class MixTest {
 		m.setInitialMessage("Hello World");
 		m.processCommand("w 0 1");
 		m.processCommand("s filename");
-		assertEquals("Hello World", u.UnMixUsingFile("filename", "eHllo World" ));
+		assertEquals("Hello World", 
+				u.UnMixUsingFile("filename", "eHllo World" ));
 	}
 	
 	@Test
@@ -906,7 +919,8 @@ public class MixTest {
 		m.processCommand("c 0 1");
 		m.processCommand("p 3");
 		m.processCommand("s filename");
-		assertEquals("Hello World", u.UnMixUsingFile("filename", "HelHelo World" ));
+		assertEquals("Hello World", 
+				u.UnMixUsingFile("filename", "HelHelo World" ));
 	
 	}
 	
@@ -920,7 +934,8 @@ public class MixTest {
 		m.processCommand("x 0 1");
 		m.processCommand("p 3");
 		m.processCommand("s filename");
-		assertEquals("Hello World", u.UnMixUsingFile("filename", "lloHe World" ));
+		assertEquals("Hello World", 
+				u.UnMixUsingFile("filename", "lloHe World" ));
 	
 	}
 	
@@ -933,7 +948,8 @@ public class MixTest {
 		m.setInitialMessage("Hello World");
 		m.processCommand("b 0 1");
 		m.processCommand("s filename");
-		assertEquals("Hello World", u.UnMixUsingFile("filename", "H0ello World" ));
+		assertEquals("Hello World", 
+				u.UnMixUsingFile("filename", "H0ello World" ));
 	
 	}
 	
@@ -946,7 +962,8 @@ public class MixTest {
 		m.setInitialMessage("Hello World");
 		m.processCommand("b 0 1");
 		m.processCommand("s filename");
-		assertEquals("Hello World", u.UnMixUsingFile("filename", "H0ello World" ));
+		assertEquals("Hello World", 
+				u.UnMixUsingFile("filename", "H0ello World" ));
 	
 	}
 	
@@ -960,7 +977,8 @@ public class MixTest {
 		m.processCommand("b 0 1");
 		m.processCommand("b Q 4");
 		m.processCommand("s filename");
-		assertEquals("Hello World", u.UnMixUsingFile("filename", "H0elQlo World" ));
+		assertEquals("Hello World", 
+				u.UnMixUsingFile("filename", "H0elQlo World" ));
 	
 	}
 	
@@ -976,7 +994,8 @@ public class MixTest {
 		m.processCommand("r 0");
 		m.processCommand("r 0");
 		m.processCommand("s filename");
-		assertEquals("Hello World", u.UnMixUsingFile("filename", "elQlo World" ));
+		assertEquals("Hello World", 
+				u.UnMixUsingFile("filename", "elQlo World" ));
 	
 	}
 	
@@ -993,7 +1012,8 @@ public class MixTest {
 		m.processCommand("r 0");
 		m.processCommand("x 0 4");
 		m.processCommand("s filename");
-		assertEquals("Hello World", u.UnMixUsingFile("filename", " World" ));
+		assertEquals("Hello World", 
+				u.UnMixUsingFile("filename", " World" ));
 	
 	}
 	
@@ -1011,7 +1031,8 @@ public class MixTest {
 		m.processCommand("x 0 4");
 		m.processCommand("p 5");
 		m.processCommand("s filename");
-		assertEquals("Hello World", u.UnMixUsingFile("filename", " WorlelQlod" ));
+		assertEquals("Hello World", 
+				u.UnMixUsingFile("filename", " WorlelQlod" ));
 	
 	}
 	
@@ -1031,9 +1052,11 @@ public class MixTest {
 		m.processCommand("p 5");
 		m.processCommand("w 0 10");
 		m.processCommand("s filename");
-		assertEquals("Hello World", u.UnMixUsingFile("filename", "dWorlelQlo " ));
+		assertEquals("Hello World", 
+				u.UnMixUsingFile("filename", "dWorlelQlo " ));
 	
 	}
+	
 	@Test
 	// Testing Unmix with commands
 	public void testUnmixFunctionalityMultiple6() {
@@ -1051,7 +1074,8 @@ public class MixTest {
 		m.processCommand("c 0 10");
 		m.processCommand("p 10");
 		m.processCommand("s filename");
-		assertEquals("Hello World", u.UnMixUsingFile("filename", "dWorlelQlo dWorlelQlo " ));
+		assertEquals("Hello World", 
+				u.UnMixUsingFile("filename", "dWorlelQlo dWorlelQlo " ));
 	
 	}
 }
