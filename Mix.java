@@ -79,7 +79,7 @@ public class Mix implements iMix {
 			String data[] = command.split(" ");
 
 			// Checking if command is input properly
-			if (data[0].length() != 1) {
+			if (data[0].length() != 1 || data[1].length() != 1) {
 				if (testing == true) 
 					return null;
 				System.out.println("Invalid command entered! "
