@@ -127,37 +127,32 @@ public class LinkedList<E> {
 		return copy;
 	}
 	
-	
 	public boolean pasteFromList(int index1, String clipboard) {
 
 		Node<E> temp = top;
 		Node<E> temp1;
-		String[] paste = clipboard.split("");
+		String paste = clipboard;
+		String testString = "This Is Test";
+		char[] CharArray = paste.toCharArray();
+ 
 
 		if (temp == null)
 			return false;
-
 		int count = 0;
-
 		int i = 0;
 		if (index1 == 0) {
 
-			temp = new Node((E) paste[0], null);
+			temp = new Node(CharArray[0], null);
 			temp.next = top;
 			top = temp;
 
-			for (i = 1; i < paste.length; i++) {
-				temp1 = new Node<E>((E) paste[i], temp.getNext());
-
+			for (i = 1; i < CharArray.length; i++) {
+				temp1 = new Node(( CharArray[i]), temp.getNext());
 				temp.next = temp1;
-
 				temp = temp1;
-
 			}
 		} else {
-
 			count = 0;
-
 			while (count != index1 - 1) {
 				temp = temp.getNext();
 				count++;
@@ -165,17 +160,16 @@ public class LinkedList<E> {
 
 			temp1 = temp;
 
-			for (i = 0; i < paste.length; i++) {
-				temp1 = new Node<E>((E) paste[i], temp.getNext());
-
+			for (i = 0; i < CharArray.length; i++) {
+				temp1 = new Node( CharArray[i], temp.getNext());
 				temp.next = temp1;
-
 				temp = temp1;
 			}
 		}
 		return true;
 
 	}
+
 
 	public void display() {
 		Node<E> temp = top;
