@@ -509,7 +509,7 @@ public class MixTest {
 		m.testing = true;
 		m.setInitialMessage("Hello World");
 		
-		assertEquals("Hello ", m.secretMessage.displayMessage());
+		assertEquals("Hello World", m.secretMessage.displayMessage());
 	}
 	
 	
