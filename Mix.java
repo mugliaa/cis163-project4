@@ -1,4 +1,4 @@
-package project4;
+package project4test;
 
 import java.io.*;
 import java.util.*;
@@ -773,7 +773,7 @@ public class Mix implements iMix {
 			if (index1 > index2) {
 				if (testing == true)
 					return null;
-				System.out.println("Invalid position entered! "
+				System.out.println("Inverted positions entered! "
 						+ "Try again!");
 				System.out.println("");
 				secretMessage.display();
@@ -1138,6 +1138,26 @@ public class Mix implements iMix {
 				if (testing == true)
 					return null;
 				System.out.println("Invalid position entered! "
+						+ "Try again!");
+				System.out.println("");
+				secretMessage.display();
+				System.out.println("");
+				System.out.println("");
+				printCommandListing();
+				System.out.println("");
+				System.out.println("Command: ");
+				String c = s.nextLine();
+				System.out.println("");
+				processCommand(c);
+				s.close();
+				return null;
+			}
+			
+			// Checking if index1 is greater than index2
+			if (index1 > index2) {
+				if (testing == true)
+					return null;
+				System.out.println("Inverted positions entered! "
 						+ "Try again!");
 				System.out.println("");
 				secretMessage.display();
