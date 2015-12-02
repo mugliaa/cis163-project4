@@ -45,6 +45,10 @@ public class UnMix implements iUnMix {
 			// Deals with b command (insert)
 			if (command.startsWith("b")) {
 				String data[] = command.split(" ");
+				if (data[2].equals("")) {
+					data[1] = " ";
+					data[2] = data[3];
+				}
 				iMessage.addBefore(Integer.parseInt(data[2]), data[1]);
 			}
 			
@@ -108,8 +112,14 @@ public class UnMix implements iUnMix {
 	 *****************************************************************/
 	private String readFile(String filename) {
 		try {
+			String name = filename;
+			
+			if (!filename.endsWith(".txt")) {
+				name += ".txt";
+			}
+			
 			// Create object of FileReader
-			FileReader inputFile = new FileReader(filename);
+			FileReader inputFile = new FileReader(name);
 
 			// Instantiate the BufferedReader Class
 			BufferedReader bufferReader = new BufferedReader(inputFile);
