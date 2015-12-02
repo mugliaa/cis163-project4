@@ -20,6 +20,7 @@ public class Mix implements iMix {
 	/** Used for saving text removed to a 'clipboard' */
 	private String clipboard;
 	
+	/** Used to ignore console for JUnit testing */
 	public boolean testing = false;
 
 	/******************************************************************
@@ -490,8 +491,8 @@ public class Mix implements iMix {
 			int index2 = Integer.parseInt(data[2]);
 
 			// Checking if index is valid
-			if (index1 < 0 || index1 > secretMessage.count() || 
-					index2 < 0 || index2 > secretMessage.count()) {
+			if (index1 < 0 || index1 >= secretMessage.count() || 
+					index2 < 0 || index2 >= secretMessage.count()) {
 				if (testing == true)
 					return null;
 				System.out.println("Invalid position entered! "
@@ -768,7 +769,7 @@ public class Mix implements iMix {
 			// Setting values into variables
 			int index1 = Integer.parseInt(data[1]);
 			int index2 = Integer.parseInt(data[2]);
-			
+
 			if (index1 > index2) {
 				if (testing == true)
 					return null;
@@ -787,13 +788,32 @@ public class Mix implements iMix {
 				s.close();
 				return null;
 			}
-
+			
 			// Checking if index is valid
 			if (index1 < 0 || index1 >= secretMessage.count() || 
 					index2 < 0 || index2 >= secretMessage.count()) {
 				if (testing == true)
 					return null;
 				System.out.println("Invalid position entered! "
+						+ "Try again!");
+				System.out.println("");
+				secretMessage.display();
+				System.out.println("");
+				System.out.println("");
+				printCommandListing();
+				System.out.println("");
+				System.out.println("Command: ");
+				String c = s.nextLine();
+				System.out.println("");
+				processCommand(c);
+				s.close();
+				return null;
+			}
+			
+			if (index1 == 0 && index2 == secretMessage.count() - 1) {
+				if (testing == true) 
+					return null;
+				System.out.println("Cannot cut the entire message! "
 						+ "Try again!");
 				System.out.println("");
 				secretMessage.display();
