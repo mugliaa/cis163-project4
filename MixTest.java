@@ -1,4 +1,4 @@
-package project4;
+package project4test;
 
 import static org.junit.Assert.*;
 
@@ -758,6 +758,50 @@ public class MixTest {
 		m.processCommand("x 0 4");
 		m.processCommand("p 1");
 		assertEquals("iThis s a test", m.secretMessage.displayMessage());
+	}
+	
+	@Test
+	// Tests copy and paste
+	public void testCopyAndPaste1() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("Test");
+		m.processCommand("c 1 2");
+		m.processCommand("p 3");
+		assertEquals("Tesest", m.secretMessage.displayMessage());
+	}
+	
+	@Test
+	// Tests copy and paste
+	public void testCopyAndPaste2() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("Test it");
+		m.processCommand("c 0 3");
+		m.processCommand("p 5");
+		assertEquals("Test Testit", m.secretMessage.displayMessage());
+	}
+	
+	@Test
+	// Tests copy and paste for entire message
+	public void testCopyAndPaste3() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("Test");
+		m.processCommand("c 0 3");
+		m.processCommand("p 0");
+		assertEquals("TestTest", m.secretMessage.displayMessage());
+	}
+	
+	@Test
+	// Test inverted positions for copy and paste - invalid
+	public void testCopyAndPasteInvalid() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("Test");
+		m.processCommand("c 2 1");
+		m.processCommand("p 0");
+		assertEquals("Test", m.secretMessage.displayMessage());
 	}
 
 	// Decrypting
