@@ -1238,6 +1238,8 @@ public class Mix implements iMix {
 	 * @param message the initial message
 	 *****************************************************************/
 	public void setInitialMessage(String message) {
+		Scanner s = new Scanner(System.in);
+		
 		int index = 0;
 		
 		// Takes the initial message and adds it character-by-character
