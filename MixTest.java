@@ -177,6 +177,342 @@ public class MixTest {
 		assertEquals("M", m.secretMessage.displayMessage());
 	}
 	
+	@Test //Testing the add before function
+	public void testAddBefore() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("This is a test");
+		m.processCommand("b c 4");
+		assertEquals("Thisc is a test", m.secretMessage.displayMessage());
+	}
+	
+	@Test //Testing the add before function
+	public void testAddBefore2() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("This is a test");
+		m.processCommand("b 7 8");
+		assertEquals("This is 7a test", m.secretMessage.displayMessage());
+	}
+	
+	@Test //Testing the add before function
+	public void testAddBeforeError() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("This is a test");
+		m.processCommand("b 72222 8123");
+		assertEquals("This is a test", m.secretMessage.displayMessage());
+	}
+	
+	@Test //Testing the add before function
+	public void testAddBeforeError2() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("This is a test");
+		m.processCommand("b 8123");
+		assertEquals("This is a test", m.secretMessage.displayMessage());
+	}
+	
+	@Test //Testing the add before function
+	public void testAddBeforeError3() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("This is a test");
+		m.processCommand("");
+		assertEquals("This is a test", m.secretMessage.displayMessage());
+	}
+	
+	@Test //Testing the add before function
+	public void testAddBeforeError4() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("This is a test");
+		m.processCommand("B c 4");
+		assertEquals("This is a test", m.secretMessage.displayMessage());
+	}
+	
+	@Test //Testing the add before function
+	public void testAddBeforeError5() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("This is a test");
+		m.processCommand("B  c  4");
+		assertEquals("This is a test", m.secretMessage.displayMessage());
+	}
+	
+	@Test //Testing the add before function
+	public void testAddBeforeMultiple() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("This is a test");
+		m.processCommand("b s 4");
+		m.processCommand("b i 5");
+		m.processCommand("b s 6");
+		m.processCommand("b t 7");
+		assertEquals("Thissist is a test", m.secretMessage.displayMessage());
+	}
+	
+	@Test //Testing the add before function
+	public void testAddBeforeNull() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("");
+		m.processCommand("b  c  4");
+		assertEquals("", m.secretMessage.displayMessage());
+	}
+	
+	@Test //Testing the paste function
+	public void testPaste() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("This is a test");
+		m.processCommand("x 0 3");
+		m.processCommand("p 0");
+		assertEquals("This is a test", m.secretMessage.displayMessage());
+	}
+	
+	@Test //Testing the paste function
+	public void testPaste2() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("This is a test");
+		m.processCommand("x 0 3");
+		m.processCommand("p 6");
+		assertEquals(" is a Thistest", m.secretMessage.displayMessage());
+	}
+	
+	@Test //Testing the paste function
+	public void testPaste3() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("This is a test");
+		m.processCommand("c 0 13");
+		m.processCommand("p 0");
+		assertEquals("This is a testThis is a test", m.secretMessage.displayMessage());
+	}
+	
+	@Test //Testing the paste function
+	public void testPaste4() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("This is a test");
+		m.processCommand("x 0 11");
+		m.processCommand("p 1");
+		assertEquals("sThis is a tet", m.secretMessage.displayMessage());
+	}
+	
+	@Test //Testing the paste function
+	public void testMultiple() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("This is a test");
+		m.processCommand("x 0 3");
+		m.processCommand("x 0 3");
+		m.processCommand("p 0");
+		m.processCommand("c 0 9");
+		m.processCommand("p 1");
+		assertEquals("  is a testis a test", m.secretMessage.displayMessage());
+	}
+	
+	@Test //Testing the paste function
+	public void testPasteError() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("This is a test");
+		m.processCommand("x  0  11");
+		m.processCommand("p     1");
+		assertEquals("This is a test", m.secretMessage.displayMessage());
+	}
+
+	@Test //Testing the paste function
+	public void testPasteError2() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("This is a test");
+		m.processCommand("X  0  11");
+		m.processCommand("p     1");
+		assertEquals("This is a test", m.secretMessage.displayMessage());
+	}
+	
+	@Test //Testing the paste function
+	public void testPasteError3() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("This is a test");
+		m.processCommand("x 0 11");
+		m.processCommand("p");
+		assertEquals("st", m.secretMessage.displayMessage());
+	}
+	
+	@Test //Testing the paste function
+	public void testPasteError4() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("This is a test");
+		m.processCommand(" 0 11");
+		m.processCommand("P");
+		assertEquals("This is a test", m.secretMessage.displayMessage());
+	}
+	
+	@Test //Testing the paste function
+	public void testPasteError5() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("This is a test");
+		m.processCommand("");
+		m.processCommand("P");
+		assertEquals("This is a test", m.secretMessage.displayMessage());
+	}
+	
+	@Test //Testing the paste function
+	public void testPasteWithOtherCommands() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("This is a test");
+		m.processCommand("r 1");
+		m.processCommand("c 0 3");
+		m.processCommand("p 0");
+		assertEquals("Tis Tis is a test", m.secretMessage.displayMessage());
+	}
+	
+	@Test //Testing the paste function
+	public void testPasteWithOtherCommands2() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("This is a test");
+		m.processCommand("r 1");
+		m.processCommand("c 0 3");
+		m.processCommand("p 0");
+		m.processCommand("r 4");
+		m.processCommand("r 8");
+		m.processCommand("b 5 3");
+		assertEquals("Tis5 is i a test", m.secretMessage.displayMessage());
+	}
+	
+	@Test //Testing the paste function
+	public void testPasteWithOtherCommands3() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("This is a test");
+		m.processCommand("r 1");
+		m.processCommand("c 0 3");
+		m.processCommand("p 0");
+		m.processCommand("r 4");
+		m.processCommand("r 8");
+		m.processCommand("b 5 3");
+		m.processCommand("w 0 15");
+		assertEquals("tis5 is i a tesT", m.secretMessage.displayMessage());
+	}
+	
+	@Test //Testing the paste function
+	public void testPasteWithOtherCommands4() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("This is a test");
+		m.processCommand("x 0 13");
+		m.processCommand("");
+		m.processCommand("p 0");
+		assertEquals("This is a test", m.secretMessage.displayMessage());
+	}
+	
+	@Test //Testing the paste function
+	public void testPasteWithOtherCommands5() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("This is a test");
+		m.processCommand("x 12 2");
+		m.processCommand("");
+		m.processCommand("p 0");
+		assertEquals("This is a test", m.secretMessage.displayMessage());
+	}
+	
+	@Test //Testing the paste function
+	public void testPasteNull() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("");
+		m.processCommand("");
+		assertEquals("", m.secretMessage.displayMessage());
+	}
+	
+	@Test //Testing the paste function
+	public void testPasteNull2() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("Hello World");
+		m.processCommand("");
+		assertEquals("Hello World", m.secretMessage.displayMessage());
+	}
+	
+	@Test //Testing 
+	public void testMultCommands() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("Hello World");
+		m.processCommand("r 0");
+		m.processCommand("r 1");
+		m.processCommand("r 3");
+		m.processCommand("r 5");
+		assertEquals("eloWold", m.secretMessage.displayMessage());
+	}
+	
+	@Test //Testing 
+	public void testMultCommands2() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("Hello World");
+		m.processCommand("r 0");
+		m.processCommand("r 1");
+		m.processCommand("r 3");
+		m.processCommand("r 5");
+		m.processCommand("r 5");
+		m.processCommand("w 0 5");
+		m.processCommand("x 1 4");
+		m.processCommand("p 1");
+		assertEquals("dloWoe", m.secretMessage.displayMessage());
+	}
+	
+	@Test //Testing 
+	public void testSwap() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("Hello World");
+		m.processCommand("w 0 10");
+		m.processCommand("");
+		assertEquals("dello WorlH", m.secretMessage.displayMessage());
+	}
+	
+	@Test //Testing 
+	public void testSwap2() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("Hello World");
+		m.processCommand("w 0 10");
+		m.processCommand("w 4 6");
+		assertEquals("dellW oorlH", m.secretMessage.displayMessage());
+	}
+	
+	@Test //Testing 
+	public void testSwap3() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("Hello World");
+		m.processCommand("w 0 10");
+		m.processCommand("w 4 6");
+		m.processCommand("w 1 7");
+		assertEquals("dollW oerlH", m.secretMessage.displayMessage());
+	} 
+	
+	@Test //Testing 
+	public void testSwapError() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("Hello World");
+		
+		assertEquals("Hello ", m.secretMessage.displayMessage());
+	}
+	
+	
 	@Test // Tests cut starting at 0 position
 	public void testCutAtZero() {
 		Mix m = new Mix();
