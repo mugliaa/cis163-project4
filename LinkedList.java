@@ -141,12 +141,13 @@ public class LinkedList<E> {
 
 		int i = 0;
 		if (index1 == 0) {
-			
-			temp1 = temp;
-			
-			while (i < paste.length) {
 
-				temp1 = new Node<E>((E) paste[i++], temp.getNext());
+			temp = new Node((E) paste[0], null);
+			temp.next = top;
+			top = temp;
+
+			for (i = 1; i < paste.length; i++) {
+				temp1 = new Node<E>((E) paste[i], temp.getNext());
 
 				temp.next = temp1;
 
