@@ -148,5 +148,95 @@ public class MixTest {
 		m.processCommand("r  3");
 		assertEquals("This is a test", m.secretMessage.displayMessage());
 	}
+	
+	@Test // Tests cut starting at 0 position
+	public void testCutAtZero() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("This is a test");
+		m.processCommand("x 0 3");
+		assertEquals(" is a test", m.secretMessage.displayMessage());
+	}
+	
+	@Test // Tests cut starting at middle position
+	public void testCutAtMiddle1() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("This is a test");
+		m.processCommand("x 3 6");
+		assertEquals("Thi a test", m.secretMessage.displayMessage());
+	}
+	
+	@Test // Tests cut starting at middle position
+	public void testCutAtMiddle2() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("This is a test");
+		m.processCommand("x 6 8");
+		assertEquals("This i test", m.secretMessage.displayMessage());
+	}
+	
+	@Test // Tests invalid cut
+	public void testCutInvalid1() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("This is a test");
+		m.processCommand("x 12 15");
+		assertEquals("This is a test", m.secretMessage.displayMessage());
+	}
+	
+	@Test // Tests invalid cut
+	public void testCutInvalid2() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("This is a test");
+		m.processCommand("x -5 6");
+		assertEquals("This is a test", m.secretMessage.displayMessage());
+	}
+	
+	@Test // Tests invalid cut
+	public void testCutInvalid3() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("This is a test");
+		m.processCommand("x 10 14");
+		assertEquals("This is a test", m.secretMessage.displayMessage());
+	}
+	
+	@Test // Tests cut starting at middle position
+	public void testCutAtEnd() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("This is a test");
+		m.processCommand("x 10 13");
+		assertEquals("This is a ", m.secretMessage.displayMessage());
+	}
+	
+	@Test // Tests cut using the same position
+	public void testCutAtSamePositions() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("This is a test");
+		m.processCommand("x 10 10");
+		assertEquals("This is a est", m.secretMessage.displayMessage());
+	}
+	
+	@Test // Tests cut using inverted positions
+	public void testCutAtInvertedPositions1() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("This is a test");
+		m.processCommand("x 13 10");
+		assertEquals("This is a test", m.secretMessage.displayMessage());
+	}
+	
+	@Test // Tests cut using inverted positions
+	public void testCutAtInvertedPositions2() {
+		Mix m = new Mix();
+		m.testing = true;
+		m.setInitialMessage("This is a test");
+		m.processCommand("x 5 1");
+		assertEquals("This is a test", m.secretMessage.displayMessage());
+	}
 
 }
