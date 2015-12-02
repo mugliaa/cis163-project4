@@ -46,20 +46,21 @@ public class LinkedList<E> {
 		Node<E> temp = top;
 		Node<E> temp1;
 		Node<E> temp2;
-
+		//converts string into a character array
+		char[] CharArray = charB4.toCharArray();
+		
 		// check for empty list
 		if (top == null) 
 			return false;
 
 		// check if top element is the target
 		if (index == 0) {
-			temp = top = new Node<E>((E) charB4, temp);
+			temp = top = new Node(CharArray[0], temp);
 
 			if (top.getNext() == null)
 				tail = null;
 			return true;
 		}
-		// Top element is not the target
 		else {
 			int i = 0;
 			for(i=1;i< index;i++)
@@ -67,7 +68,7 @@ public class LinkedList<E> {
 				temp = temp.getNext();
 			}
 			temp2 = temp.getNext();
-			temp1 = new Node<E> ((E)charB4, temp2);
+			temp1 = new Node(CharArray[0], temp2);
 			temp.setNext(temp1); 
 		}
 		return false;
