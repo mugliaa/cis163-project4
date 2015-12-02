@@ -295,5 +295,85 @@ public class MixTest {
 		assertEquals("iThis s a test", m.secretMessage.displayMessage());
 	}
 	
+	
+	// Decrypting
+	
+	@Test // Tests a series of commands and decryption
+	public void testDecryption1() {
+		Mix m = new Mix();
+		UnMix u = new UnMix();
+		m.testing = true;
+		m.setInitialMessage("Adam Muglia");
+		m.processCommand("r 0"); 	// dam Muglia
+		m.processCommand("x 4 6");	// dam lia
+		m.processCommand("w 0 4");	// lam dia
+		m.processCommand("s testit");
+		m.processCommand("Q");
+		
+		assertEquals("Adam Muglia", 
+				u.UnMixUsingFile("testit", "lam dia"));
+	}
+	
+	@Test // Tests a series of commands and decryption
+	public void testDecryption2() {
+		Mix m = new Mix();
+		UnMix u = new UnMix();
+		m.testing = true;
+		m.setInitialMessage("This is a test");
+		m.processCommand("r 10"); 	// This is a est
+		m.processCommand("x 4 6");	// This a est
+		m.processCommand("w 0 4");	//  hisTa est
+		m.processCommand("s testit");
+		m.processCommand("Q");
+		
+		assertEquals("This is a test", 
+				u.UnMixUsingFile("testit", " hisTa est"));
+	}
+	
+	@Test // Tests a series of commands and decryption
+	public void testDecryption3() {
+		Mix m = new Mix();
+		UnMix u = new UnMix();
+		m.testing = true;
+		m.setInitialMessage("Hello world");
+		m.processCommand("c 0 4");	// Hello world
+		m.processCommand("x 3 4"); 	// Hel world
+		m.processCommand("p 4");	// Hel loworld
+		m.processCommand("r 4"); 	// Hel oworld
+		m.processCommand("s testit");
+		m.processCommand("Q");
+		
+		assertEquals("Hello world", 
+				u.UnMixUsingFile("testit", "Hel oworld"));
+	}
+	
+	@Test // Tests invalid file
+	public void testDecryptionUsingInvalidFile() {
+		Mix m = new Mix();
+		UnMix u = new UnMix();
+		m.testing = true;
+		m.setInitialMessage("Hi everyone");
+		m.processCommand("r 0");	// i everyone
+		m.processCommand("w 0 2");	// e iveryone
+		m.processCommand("s testit");
+		m.processCommand("Q");
+		
+		assertEquals(null, u.UnMixUsingFile("test", "e iveryone"));
+	}
+	
+	@Test // Tests file being used on different message
+	public void testDecryptionWithWrongMessage() {
+		Mix m = new Mix();
+		UnMix u = new UnMix();
+		m.testing = true;
+		m.setInitialMessage("This is a test");
+		m.processCommand("r 0"); 	// his is a test
+		m.processCommand("w 0 4");	// iis hs a test
+		m.processCommand("s testit");
+		m.processCommand("Q");
+		
+		u.UnMixUsingFile("testit", "Hi");
+	}
+	
 
 }
